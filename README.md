@@ -1,2 +1,2 @@
 # About-DataStructuresAndAlgorithms
-数据结构与算法相关
+学习数据结构与算法的相关代码
