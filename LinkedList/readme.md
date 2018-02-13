@@ -3,11 +3,8 @@
 ![](./pic/20180213105826.png)
 
 head:头指针
-&lt;br&gt;
 value:数据域
-&lt;br&gt;
 pointer:指向其后继节点的指针
-&lt;br&gt;
 
 基本功能:
 
