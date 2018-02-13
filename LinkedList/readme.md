@@ -1,6 +1,7 @@
 # 单向链表(one way linked list)
 
-![](C:\Users\xl\Storage\Git\About-DataStructures-Algorithms\LinkedList\pic\20180213105826.png)
+![](./pic/20180213105826.png)
+
 基本功能:
 
 *   增加：追加元素
