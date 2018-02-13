@@ -1,0 +1,11 @@
+# 单向链表(one way linked list)
+
+![](C:\Users\xl\Storage\Git\About-DataStructures-Algorithms\LinkedList\pic\20180213105826.png)
+基本功能:
+
+*   增加：追加元素
+*   插入：前插(包括头节点)、后插
+*   删除：删除指定位置，包括头节点
+*   查看：得到指定下标元素
+*   修改：修改指定下标元素
+*   排序：根据用户提供的比较函数进行升序或者降序
