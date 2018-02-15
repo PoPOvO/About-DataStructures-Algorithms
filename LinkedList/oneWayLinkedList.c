@@ -6,6 +6,7 @@
 
 #define TRUE 1
 #define FALSE 0
+#define NOT_FOUND -1
 
 typedef unsigned char boolean;
 
@@ -23,40 +24,35 @@ typedef struct Node {
 } Node, *LinkedList;
 
 boolean initLinkedList(Node **pHead, boolean (*inputValue)(USER_TYPE*)); //初始化链表 
-boolean inputPoint(Point *point);										 //用户实现的输入函数 
 boolean destoryLinkedList(Node **pHead);                                 //销毁链表 
 void printLinkedList(Node *head);										 //打印链表 
 boolean appendValue(Node* head, USER_TYPE value);                        //追加 
-boolean behindInsertNode(Node *head, USER_TYPE value, int pos);          //尾插 
-boolean frontInsertNode(Node **pHead, USER_TYPE value, int pos);         //前插 
-boolean deleteNode(Node **pHead, int pos);                               //删除节点 
+boolean insertNode(Node **pHead, USER_TYPE value, int pos);         	 //插入 
+boolean deleteNodeByIndex(Node **pHead, int pos);                        //删除节点 
 boolean getValueByIndex(Node *head, USER_TYPE *value, int index);        //查看节点数据 
-boolean motifyNodeByIndex(Node *head, USER_TYPE value, int index);       //修改节点数据 
+boolean modifyNodeByIndex(Node *head, USER_TYPE value, int index);       //修改节点数据 
 int getLength(Node *head);                                               //获取链表长度 
+int indexOf(Node *head, USER_TYPE value, 								 //得到第一个匹配元素的下标 
+	boolean (*equals)(USER_TYPE one, USER_TYPE two)); 
 void bubbleSortList(Node *head, boolean isAscending,                     //排序 
 	boolean (*oneGreaterThanTwo)(USER_TYPE one, USER_TYPE two));     
-boolean oneGreaterThanTwo(Point one, Point two);                         //用户实现的比较函数 
-boolean Iterator(Node *head, void (*operatorValue)(USER_TYPE value));    //对链表进行迭代 
+boolean iterator(Node *head, void (*operatorValue)(USER_TYPE value));    //对链表进行迭代 
+
+boolean oneGreaterThanTwo(Point one, Point two);                         //用户实现的比较大小函数 
+boolean equals(Point one, Point two);									 //用户定义的比较相等函数
+boolean inputPoint(Point *point);										 //用户实现的输入函数 
 
 /*
- 对链表进行遍历
- head:链表头节点地址 
- operatorValue：由用户实现，对链表元素进行操作 
-*/
-boolean Iterator(Node *head, void (*operatorValue)(USER_TYPE value)) {
-	if (head == NULL) {
-		return FALSE;
-	}
-	
-	while (head != NULL) {
-		operatorValue(head->value);		
-		head = head->next;
-	}
-	return TRUE;
-} 
+ 由用户实现的输入函数，用于读入一个值 。 
+ *point:一个点坐标数据 
+*/ 
+boolean inputPoint(Point *point) {
+	printf("输入点坐标(ctrl+Z结束):");
+	return 2 == scanf("%d%d", &(point->row), &(point->col)); 
+}
 
 /*
- 由用户实现的比较函数，若one > two，返回TRUE
+ 由用户实现的比较大小函数，若one > two，返回TRUE
  one:待比较数据 
  two:待比较数据 
 */ 
@@ -67,6 +63,35 @@ boolean oneGreaterThanTwo(Point one, Point two) {
 	}
 	return FALSE;
 }
+
+/*
+ 用户定义的比较相等函数 
+ one:待比较数据 
+ two:待比较数据 
+*/
+boolean equals(Point one, Point two) {
+	if (one.row	== two.row && one.col == two.col) {
+		return TRUE;
+	}	
+	return FALSE; 
+}
+
+/*
+ 对链表进行遍历
+ head:链表头节点地址 
+ operatorValue：由用户实现，对链表元素进行操作 
+*/
+boolean iterator(Node *head, void (*operatorValue)(USER_TYPE value)) {
+	if (head == NULL) {
+		return FALSE;
+	}
+	
+	while (head != NULL) {
+		operatorValue(head->value);		
+		head = head->next;
+	}
+	return TRUE;
+} 
 
 /*
  使用冒泡排序对链表进行排序
@@ -87,9 +112,9 @@ void bubbleSortList(Node *head, boolean isAscending,
 		ptr = head; 			//需要保存头指针 
 		for (j = 0; j < listLen-i-1; j++) {
 			//升序或者降序 
-			isAscending == TRUE ? (flag = oneGreaterThanTwo(ptr->value,
-				ptr->next->value))
-				: (flag = oneGreaterThanTwo(ptr->next->value, ptr->value));
+			isAscending == TRUE ? 
+				(flag = oneGreaterThanTwo(ptr->value, ptr->next->value)) :
+				(flag = oneGreaterThanTwo(ptr->next->value, ptr->value));
 			if (flag) {
 				temp = ptr->value;
 				ptr->value = ptr->next->value;
@@ -98,6 +123,24 @@ void bubbleSortList(Node *head, boolean isAscending,
 			ptr = ptr->next;
 		}
 	}
+}
+
+/*
+ 得到第一个和所给元素相等的元素下标 
+ head:链表头结点地址  
+ value:目标元素
+ equals:用户定义的比较函数 
+*/
+int indexOf(Node *head, USER_TYPE value, boolean (*equals)(USER_TYPE one, USER_TYPE two)) {
+	int cnt = NOT_FOUND;
+	while (head != NULL) {
+		++cnt;
+		if (TRUE == equals(head->value, value)) {
+			return cnt;
+		}
+		head = head->next;
+	}
+	return cnt;
 }
 
 /*
@@ -120,7 +163,7 @@ int getLength(Node *head) {
  value:修改的数据 
  index:节点下标  
 */
-boolean motifyNodeByIndex(Node *head, USER_TYPE value, int index) {
+boolean modifyNodeByIndex(Node *head, USER_TYPE value, int index) {
 	Node *ptr = head;
 	
 	if (head == NULL || index < 0 || index > getLength(head)-1) {
@@ -159,7 +202,7 @@ boolean getValueByIndex(Node *head, USER_TYPE *value, int index) {
  pHead:指向头节点的指针的地址 
  pos:删除节点下标 
 */ 
-boolean deleteNode(Node **pHead, int pos) {	
+boolean deleteNodeByIndex(Node **pHead, int pos) {	
 	Node *prev;
 	Node *temp = *pHead;
 	int len = getLength(*pHead); 
@@ -189,12 +232,12 @@ boolean deleteNode(Node **pHead, int pos) {
 }
 
 /*
- 在指定位置前插一个节点
+ 在指定位置插入一个节点
  head:链表头结点地址 
  value:插入节点的数据域 
  pos:插入位置 
 */
-boolean frontInsertNode(Node **pHead, USER_TYPE value, int pos) {
+boolean insertNode(Node **pHead, USER_TYPE value, int pos) {
 	Node *temp = *pHead;
 	Node *current;
 	if (pos < 0) {
@@ -220,31 +263,6 @@ boolean frontInsertNode(Node **pHead, USER_TYPE value, int pos) {
 		temp = temp->next;
 	}
 	return FALSE;	
-}
-
-/*
- 在指定位置后插一个节点
- head:链表头结点地址 
- value:插入节点的数据域 
- pos:插入位置 
-*/
-boolean behindInsertNode(Node *head, USER_TYPE value, int pos) {
-	Node *current;
-	if (pos < 0) {
-		return FALSE;
-	}
-
-	while (head != NULL) {
-		if (pos-- == 1) {
-			current = (Node*)malloc(sizeof(Node));
-			current->value = value;
-			current->next = head->next;
-			head->next = current;
-			return TRUE;
-		} 
-		head = head->next;
-	}
-	return FALSE;
 }
 
 /*
@@ -332,15 +350,6 @@ boolean initLinkedList(Node **pHead, boolean (*inputValue)(USER_TYPE*)) {
 }
 
 /*
- 由用户实现的函数，用于读入一个值 。 
- *point:一个点坐标数据 
-*/ 
-boolean inputPoint(Point *point) {
-	printf("输入点坐标(ctrl+Z结束):");
-	return 2 == scanf("%d%d", &(point->row), &(point->col)); 
-}
-
-/*
 1 2 3 4 5 6 7 8
 */
 int main(void) {
@@ -351,12 +360,12 @@ int main(void) {
 	};
 	
  	initLinkedList(&head, inputPoint);
- 	//motifyNodeByIndex(head, temp, 3);
+ 	modifyNodeByIndex(head, temp, 3);
 	//appendValue(head, temp);
-	//frontInsertNode(&head, temp, 0);
-	bubbleSortList(head, TRUE, oneGreaterThanTwo); 
+	insertNode(&head, temp, 2);
+	bubbleSortList(head, FALSE, oneGreaterThanTwo); 
 	printLinkedList(head);
-
+	printf("\nIndex:%d", indexOf(head, temp, equals));
  	destoryLinkedList(&head);
 	return 0;
 }
