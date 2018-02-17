@@ -48,14 +48,12 @@ boolean destoryLinkedList(Node **pHead) {
 	if (*pHead == NULL) {
 		return FALSE;
 	}
-	
 									//释放头节点后面的节点 
 	while (ptr != *pHead) {
  		temp = ptr->next;
 		free(ptr);
 		ptr = temp;
-	} 
-									//最后释放头节点 
+	}								//最后释放头节点 
 	free(*pHead);
 	*pHead = NULL;
 	
