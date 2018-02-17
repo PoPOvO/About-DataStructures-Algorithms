@@ -1,5 +1,5 @@
 /*
- ����ͷ�ڵ�˫��ѭ������
+ 不带头节点双向循环链表
 */
 
 #include <stdio.h> 
@@ -11,7 +11,7 @@
 typedef unsigned char boolean;
 
 /*
- ��ʾƽ���ϵĵ� 
+ 表示平面上的点 
 */ 
 typedef struct Point {
 	int row;
@@ -32,9 +32,9 @@ void printLinkedList(Node *head);
 
 void printLinkedList(Node *head) {
 	Node *ptr = head->next;
-	puts("�������:");
+	puts("结果如下:");
 
-	//�ȴ�ӡͷ�ڵ� 
+	//先打印头节点 
 	printf("(%d, %d)", head->value.row, head->value.col); 
 	while (ptr != head) {
 		printf("(%d, %d)", ptr->value.row, ptr->value.col);
@@ -49,13 +49,13 @@ boolean destoryLinkedList(Node **pHead) {
 		return FALSE;
 	}
 	
-	//�ͷ�ͷ�ڵ����Ľڵ� 
+									//释放头节点后面的节点 
 	while (ptr != *pHead) {
  		temp = ptr->next;
 		free(ptr);
 		ptr = temp;
 	} 
-	//����ͷ�ͷ�ڵ� 
+									//最后释放头节点 
 	free(*pHead);
 	*pHead = NULL;
 	
@@ -74,22 +74,22 @@ boolean initLinkedList(Node **pHead, boolean (*inputValue)(USER_TYPE*)) {
 	while (TRUE == inputValue(&value)) {
 		current = (Node*)malloc(sizeof(Node));
 		current->value = value;
-		current->next = *pHead;				//ÿһ���½ڵ��nextָ�붼��ָ��ͷ�ڵ� 
+		current->next = *pHead;				//每一个新节点的next指针都先指向头节点 
 
 		if (*pHead == NULL) {
 			*pHead = prev = current;
 		} else {
-			prev->next = current;			//�޸���һ���ڵ��nextָ��Ϊ��ǰ�ڵ� 
-			current->prev = prev;  			//���ĵ�ǰ�ڵ��prevָ��Ϊ��һ���ڵ� 
+			prev->next = current;			//修改上一个节点的next指针为当前节点 
+			current->prev = prev;  			//更改当前节点的prev指针为上一个节点 
 			prev = current;
 		}	
-		(*pHead)->prev = current;			//������Σ���Ҫ��ͷ�ڵ��prevָ��ָ��ǰ����β�ڵ� 
+		(*pHead)->prev = current;			//无论如何，都要将头节点的prev指针指向当前，即尾节点 
 	}
 	return TRUE;
 }
 
 boolean inputPoint(Point *point) {
-	printf("���������(ctrl+Z����):");
+	printf("输入点坐标(ctrl+Z结束):");
 	return 2 == scanf("%d%d", &(point->row), &(point->col)); 
 }
 
