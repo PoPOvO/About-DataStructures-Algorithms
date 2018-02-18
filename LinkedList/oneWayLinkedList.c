@@ -1,5 +1,5 @@
 /*
- ²»´øÍ·½Úµãµ¥ÏòÁ´±í,Ã¿¸ö½Úµã´æ´¢ÓÃ»§ÊäÈëµÄµã×ø±ê 
+ ä¸å¸¦å¤´èŠ‚ç‚¹å•å‘é“¾è¡¨,æ¯ä¸ªèŠ‚ç‚¹å­˜å‚¨ç”¨æˆ·è¾“å…¥çš„ç‚¹åæ ‡ 
 */
 #include <stdio.h> 
 #include <stdlib.h>
@@ -11,7 +11,7 @@
 typedef unsigned char boolean;
 
 /*
- ±íÊ¾Æ½ÃæÉÏµÄµã 
+ è¡¨ç¤ºå¹³é¢ä¸Šçš„ç‚¹ 
 */ 
 typedef struct Point {
 	int row;
@@ -23,38 +23,38 @@ typedef struct Node {
 	struct Node* next;
 } Node, *LinkedList;
 
-boolean initLinkedList(Node **pHead, boolean (*inputValue)(USER_TYPE*)); //³õÊ¼»¯Á´±í 
-boolean destoryLinkedList(Node **pHead);                                 //Ïú»ÙÁ´±í 
-void printLinkedList(Node *head);										 //´òÓ¡Á´±í 
-boolean appendValue(Node* head, USER_TYPE value);                        //×·¼Ó 
-boolean insertNode(Node **pHead, USER_TYPE value, int pos);         	 //²åÈë 
-boolean deleteNodeByIndex(Node **pHead, int pos);                        //É¾³ı½Úµã 
-boolean getValueByIndex(Node *head, USER_TYPE *value, int index);        //²é¿´½ÚµãÊı¾İ 
-boolean modifyNodeByIndex(Node *head, USER_TYPE value, int index);       //ĞŞ¸Ä½ÚµãÊı¾İ 
-int getLength(Node *head);                                               //»ñÈ¡Á´±í³¤¶È 
-int indexOf(Node *head, USER_TYPE value, 								 //µÃµ½µÚÒ»¸öÆ¥ÅäÔªËØµÄÏÂ±ê 
+boolean initLinkedList(Node **pHead, boolean (*inputValue)(USER_TYPE*)); //åˆå§‹åŒ–é“¾è¡¨ 
+boolean destoryLinkedList(Node **pHead);                                 //é”€æ¯é“¾è¡¨ 
+void printLinkedList(Node *head);					 //æ‰“å°é“¾è¡¨ 
+boolean appendValue(Node* head, USER_TYPE value);                        //è¿½åŠ  
+boolean insertNode(Node **pHead, USER_TYPE value, int pos);         	 //æ’å…¥ 
+boolean deleteNodeByIndex(Node **pHead, int pos);                        //åˆ é™¤èŠ‚ç‚¹ 
+boolean getValueByIndex(Node *head, USER_TYPE *value, int index);        //æŸ¥çœ‹èŠ‚ç‚¹æ•°æ® 
+boolean modifyNodeByIndex(Node *head, USER_TYPE value, int index);       //ä¿®æ”¹èŠ‚ç‚¹æ•°æ® 
+int getLength(Node *head);                                               //è·å–é“¾è¡¨é•¿åº¦ 
+int indexOf(Node *head, USER_TYPE value, 				 //å¾—åˆ°ç¬¬ä¸€ä¸ªåŒ¹é…å…ƒç´ çš„ä¸‹æ ‡ 
 	boolean (*equals)(USER_TYPE one, USER_TYPE two)); 
-void bubbleSortList(Node *head, boolean isAscending,                     //ÅÅĞò 
+void bubbleSortList(Node *head, boolean isAscending,                     //æ’åº 
 	boolean (*oneGreaterThanTwo)(USER_TYPE one, USER_TYPE two));     
-boolean iterator(Node *head, void (*operatorValue)(USER_TYPE value));    //¶ÔÁ´±í½øĞĞµü´ú 
+boolean iterator(Node *head, void (*operatorValue)(USER_TYPE value));    //å¯¹é“¾è¡¨è¿›è¡Œè¿­ä»£ 
 
-boolean oneGreaterThanTwo(Point one, Point two);                         //ÓÃ»§ÊµÏÖµÄ±È½Ï´óĞ¡º¯Êı 
-boolean equals(Point one, Point two);									 //ÓÃ»§¶¨ÒåµÄ±È½ÏÏàµÈº¯Êı
-boolean inputPoint(Point *point);										 //ÓÃ»§ÊµÏÖµÄÊäÈëº¯Êı 
+boolean oneGreaterThanTwo(Point one, Point two);                         //ç”¨æˆ·å®ç°çš„æ¯”è¾ƒå¤§å°å‡½æ•° 
+boolean equals(Point one, Point two);					 //ç”¨æˆ·å®šä¹‰çš„æ¯”è¾ƒç›¸ç­‰å‡½æ•°
+boolean inputPoint(Point *point);					 //ç”¨æˆ·å®ç°çš„è¾“å…¥å‡½æ•° 
 
 /*
- ÓÉÓÃ»§ÊµÏÖµÄÊäÈëº¯Êı£¬ÓÃÓÚ¶ÁÈëÒ»¸öÖµ ¡£ 
- *point:Ò»¸öµã×ø±êÊı¾İ 
+ ç”±ç”¨æˆ·å®ç°çš„è¾“å…¥å‡½æ•°ï¼Œç”¨äºè¯»å…¥ä¸€ä¸ªå€¼ ã€‚ 
+ *point:ä¸€ä¸ªç‚¹åæ ‡æ•°æ® 
 */ 
 boolean inputPoint(Point *point) {
-	printf("ÊäÈëµã×ø±ê(ctrl+Z½áÊø):");
+	printf("è¾“å…¥ç‚¹åæ ‡(ctrl+Zç»“æŸ):");
 	return 2 == scanf("%d%d", &(point->row), &(point->col)); 
 }
 
 /*
- ÓÉÓÃ»§ÊµÏÖµÄ±È½Ï´óĞ¡º¯Êı£¬Èôone > two£¬·µ»ØTRUE
- one:´ı±È½ÏÊı¾İ 
- two:´ı±È½ÏÊı¾İ 
+ ç”±ç”¨æˆ·å®ç°çš„æ¯”è¾ƒå¤§å°å‡½æ•°ï¼Œè‹¥one > twoï¼Œè¿”å›TRUE
+ one:å¾…æ¯”è¾ƒæ•°æ® 
+ two:å¾…æ¯”è¾ƒæ•°æ® 
 */ 
 boolean oneGreaterThanTwo(Point one, Point two) {
 	if (((one.row*one.row + one.col*one.col) 
@@ -65,9 +65,9 @@ boolean oneGreaterThanTwo(Point one, Point two) {
 }
 
 /*
- ÓÃ»§¶¨ÒåµÄ±È½ÏÏàµÈº¯Êı 
- one:´ı±È½ÏÊı¾İ 
- two:´ı±È½ÏÊı¾İ 
+ ç”¨æˆ·å®šä¹‰çš„æ¯”è¾ƒç›¸ç­‰å‡½æ•° 
+ one:å¾…æ¯”è¾ƒæ•°æ® 
+ two:å¾…æ¯”è¾ƒæ•°æ® 
 */
 boolean equals(Point one, Point two) {
 	if (one.row	== two.row && one.col == two.col) {
@@ -77,9 +77,9 @@ boolean equals(Point one, Point two) {
 }
 
 /*
- ¶ÔÁ´±í½øĞĞ±éÀú
- head:Á´±íÍ·½ÚµãµØÖ· 
- operatorValue£ºÓÉÓÃ»§ÊµÏÖ£¬¶ÔÁ´±íÔªËØ½øĞĞ²Ù×÷ 
+ å¯¹é“¾è¡¨è¿›è¡Œéå†
+ head:é“¾è¡¨å¤´èŠ‚ç‚¹åœ°å€ 
+ operatorValueï¼šç”±ç”¨æˆ·å®ç°ï¼Œå¯¹é“¾è¡¨å…ƒç´ è¿›è¡Œæ“ä½œ 
 */
 boolean iterator(Node *head, void (*operatorValue)(USER_TYPE value)) {
 	if (head == NULL) {
@@ -94,10 +94,10 @@ boolean iterator(Node *head, void (*operatorValue)(USER_TYPE value)) {
 } 
 
 /*
- Ê¹ÓÃÃ°ÅİÅÅĞò¶ÔÁ´±í½øĞĞÅÅĞò
- head:Á´±íÍ·½ÚµãµØÖ· 
- isAscending:ÊÇ·ñ²ÉÓÃÉıĞò£¬ÉıĞò ÎªTRUE£¬½µĞòÎªFALSE 
- oneGreaterThanTwo:ÓÉÓÃ»§ÊµÏÖµÄ±È½Ïº¯Êı 
+ ä½¿ç”¨å†’æ³¡æ’åºå¯¹é“¾è¡¨è¿›è¡Œæ’åº
+ head:é“¾è¡¨å¤´èŠ‚ç‚¹åœ°å€ 
+ isAscending:æ˜¯å¦é‡‡ç”¨å‡åºï¼Œå‡åº ä¸ºTRUEï¼Œé™åºä¸ºFALSE 
+ oneGreaterThanTwo:ç”±ç”¨æˆ·å®ç°çš„æ¯”è¾ƒå‡½æ•° 
 */ 
 void bubbleSortList(Node *head, boolean isAscending,
 	boolean (*oneGreaterThanTwo)(USER_TYPE one, USER_TYPE two) ) {
@@ -109,9 +109,9 @@ void bubbleSortList(Node *head, boolean isAscending,
 	boolean flag;
 	
 	for (i = 0; i < listLen-1; i++) {
-		ptr = head; 			//ĞèÒª±£´æÍ·Ö¸Õë 
+		ptr = head; 			//éœ€è¦ä¿å­˜å¤´æŒ‡é’ˆ 
 		for (j = 0; j < listLen-i-1; j++) {
-			//ÉıĞò»òÕß½µĞò 
+			//å‡åºæˆ–è€…é™åº 
 			isAscending == TRUE ? 
 				(flag = oneGreaterThanTwo(ptr->value, ptr->next->value)) :
 				(flag = oneGreaterThanTwo(ptr->next->value, ptr->value));
@@ -126,10 +126,10 @@ void bubbleSortList(Node *head, boolean isAscending,
 }
 
 /*
- µÃµ½µÚÒ»¸öºÍËù¸øÔªËØÏàµÈµÄÔªËØÏÂ±ê 
- head:Á´±íÍ·½áµãµØÖ·  
- value:Ä¿±êÔªËØ
- equals:ÓÃ»§¶¨ÒåµÄ±È½Ïº¯Êı 
+ å¾—åˆ°ç¬¬ä¸€ä¸ªå’Œæ‰€ç»™å…ƒç´ ç›¸ç­‰çš„å…ƒç´ ä¸‹æ ‡ 
+ head:é“¾è¡¨å¤´ç»“ç‚¹åœ°å€  
+ value:ç›®æ ‡å…ƒç´ 
+ equals:ç”¨æˆ·å®šä¹‰çš„æ¯”è¾ƒå‡½æ•° 
 */
 int indexOf(Node *head, USER_TYPE value, boolean (*equals)(USER_TYPE one, USER_TYPE two)) {
 	int cnt = NOT_FOUND;
@@ -144,8 +144,8 @@ int indexOf(Node *head, USER_TYPE value, boolean (*equals)(USER_TYPE one, USER_T
 }
 
 /*
- µÃµ½Á´±í³¤¶È
- head:Á´±íÍ·½áµãµØÖ·  
+ å¾—åˆ°é“¾è¡¨é•¿åº¦
+ head:é“¾è¡¨å¤´ç»“ç‚¹åœ°å€  
 */
 int getLength(Node *head) {
 	int cnt = 0;
@@ -158,10 +158,10 @@ int getLength(Node *head) {
 }
 
 /*
- ¸ù¾İÏÂ±êĞŞ¸Ä½ÚµãÊı¾İÓò
- head:Á´±íÍ·½áµãµØÖ· 
- value:ĞŞ¸ÄµÄÊı¾İ 
- index:½ÚµãÏÂ±ê  
+ æ ¹æ®ä¸‹æ ‡ä¿®æ”¹èŠ‚ç‚¹æ•°æ®åŸŸ
+ head:é“¾è¡¨å¤´ç»“ç‚¹åœ°å€ 
+ value:ä¿®æ”¹çš„æ•°æ® 
+ index:èŠ‚ç‚¹ä¸‹æ ‡  
 */
 boolean modifyNodeByIndex(Node *head, USER_TYPE value, int index) {
 	Node *ptr = head;
@@ -181,10 +181,10 @@ boolean modifyNodeByIndex(Node *head, USER_TYPE value, int index) {
 }
 
 /*
- ¸ù¾İÏÂ±êµÃµ½¶ÔÓ¦½ÚµãÊı¾İÓò 
- head:Á´±íÍ·½áµãµØÖ· 
- value:Êı¾İÓòÍ¨¹ıÖ¸Õë·µ»Ø
- index:½ÚµãÏÂ±ê 
+ æ ¹æ®ä¸‹æ ‡å¾—åˆ°å¯¹åº”èŠ‚ç‚¹æ•°æ®åŸŸ 
+ head:é“¾è¡¨å¤´ç»“ç‚¹åœ°å€ 
+ value:æ•°æ®åŸŸé€šè¿‡æŒ‡é’ˆè¿”å›
+ index:èŠ‚ç‚¹ä¸‹æ ‡ 
 */ 
 boolean getValueByIndex(Node *head, USER_TYPE *value, int index) {
 	while (head != NULL) {
@@ -198,9 +198,9 @@ boolean getValueByIndex(Node *head, USER_TYPE *value, int index) {
 }
 
 /*
- ÔÚÖ¸¶¨Î»ÖÃÉ¾³ıÒ»¸ö½Úµã£¬¿ÉÒÔÎªÍ·½Úµã 
- pHead:Ö¸ÏòÍ·½ÚµãµÄÖ¸ÕëµÄµØÖ· 
- pos:É¾³ı½ÚµãÏÂ±ê 
+ åœ¨æŒ‡å®šä½ç½®åˆ é™¤ä¸€ä¸ªèŠ‚ç‚¹ï¼Œå¯ä»¥ä¸ºå¤´èŠ‚ç‚¹ 
+ pHead:æŒ‡å‘å¤´èŠ‚ç‚¹çš„æŒ‡é’ˆçš„åœ°å€ 
+ pos:åˆ é™¤èŠ‚ç‚¹ä¸‹æ ‡ 
 */ 
 boolean deleteNodeByIndex(Node **pHead, int pos) {	
 	Node *prev;
@@ -210,7 +210,7 @@ boolean deleteNodeByIndex(Node **pHead, int pos) {
 		return FALSE;
 	}
 
-	//É¾³ıÍ·½Úµã 
+	//åˆ é™¤å¤´èŠ‚ç‚¹ 
 	if (pos == 0) {
 		prev = *pHead;
 		*pHead = (*pHead)->next;
@@ -232,10 +232,10 @@ boolean deleteNodeByIndex(Node **pHead, int pos) {
 }
 
 /*
- ÔÚÖ¸¶¨Î»ÖÃ²åÈëÒ»¸ö½Úµã
- head:Á´±íÍ·½áµãµØÖ· 
- value:²åÈë½ÚµãµÄÊı¾İÓò 
- pos:²åÈëÎ»ÖÃ 
+ åœ¨æŒ‡å®šä½ç½®æ’å…¥ä¸€ä¸ªèŠ‚ç‚¹
+ head:é“¾è¡¨å¤´ç»“ç‚¹åœ°å€ 
+ value:æ’å…¥èŠ‚ç‚¹çš„æ•°æ®åŸŸ 
+ pos:æ’å…¥ä½ç½® 
 */
 boolean insertNode(Node **pHead, USER_TYPE value, int pos) {
 	Node *temp = *pHead;
@@ -266,9 +266,9 @@ boolean insertNode(Node **pHead, USER_TYPE value, int pos) {
 }
 
 /*
- ×·¼ÓÔªËØ
- head:Á´±íÍ·½áµãµØÖ·   
- value:×·¼ÓÊı¾İ 
+ è¿½åŠ å…ƒç´ 
+ head:é“¾è¡¨å¤´ç»“ç‚¹åœ°å€   
+ value:è¿½åŠ æ•°æ® 
 */
 boolean appendValue(Node* head, USER_TYPE value) {
 	Node *prev;
@@ -289,11 +289,11 @@ boolean appendValue(Node* head, USER_TYPE value) {
 } 
 
 /*
- ´òÓ¡Á´±íÔªËØµ½¿ØÖÆÌ¨
- head:Á´±íÍ·½áµãµØÖ· 
+ æ‰“å°é“¾è¡¨å…ƒç´ åˆ°æ§åˆ¶å°
+ head:é“¾è¡¨å¤´ç»“ç‚¹åœ°å€ 
 */
 void printLinkedList(Node *head) {
-	puts("½á¹ûÈçÏÂ£º");
+	puts("ç»“æœå¦‚ä¸‹ï¼š");
 	while (head != NULL) {
 		printf("(%d,%d) ", head->value.row, head->value.col);
 		head = head->next;
@@ -301,8 +301,8 @@ void printLinkedList(Node *head) {
 }
 
 /*
- Ïú»ÙÁ´±í£¬ÊÍ·ÅËùÓĞ½Úµã¡£
- pHead:Ö¸ÏòÍ·½ÚµãµÄÖ¸ÕëµÄµØÖ· 
+ é”€æ¯é“¾è¡¨ï¼Œé‡Šæ”¾æ‰€æœ‰èŠ‚ç‚¹ã€‚
+ pHead:æŒ‡å‘å¤´èŠ‚ç‚¹çš„æŒ‡é’ˆçš„åœ°å€ 
 */ 
 boolean destoryLinkedList(Node **pHead) {
 	Node *temp = NULL;
@@ -321,9 +321,9 @@ boolean destoryLinkedList(Node **pHead) {
 }
 
 /*
- ³õÊ¼»¯Á´±í¡£ 
- pHead:Á´±íÍ·½ÚµãµØÖ· 
- inputValue£ºĞèÒªÓÉÓÃ»§ÊµÏÖµÄº¯Êı¡£ÓÃÓÚ¶ÁÈëÒ»¸öÖµ¡£ 
+ åˆå§‹åŒ–é“¾è¡¨ã€‚ 
+ pHead:é“¾è¡¨å¤´èŠ‚ç‚¹åœ°å€ 
+ inputValueï¼šéœ€è¦ç”±ç”¨æˆ·å®ç°çš„å‡½æ•°ã€‚ç”¨äºè¯»å…¥ä¸€ä¸ªå€¼ã€‚ 
 */ 
 boolean initLinkedList(Node **pHead, boolean (*inputValue)(USER_TYPE*)) {
 	Node *current = NULL;
