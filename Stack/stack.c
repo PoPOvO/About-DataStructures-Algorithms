@@ -8,7 +8,7 @@
 typedef unsigned char boolean;
 
 /*
- ±íÊ¾Æ½ÃæÉÏµÄµã 
+ è¡¨ç¤ºå¹³é¢ä¸Šçš„ç‚¹ 
 */ 
 typedef struct Point {
 	int row;
@@ -21,14 +21,14 @@ typedef struct Stack {
 	USER_TYPE *arrays; 
 } Stack;
 
-boolean initStack(Stack **pStack, int capacity);					//³õÊ¼»¯ 
-boolean destroyStack(Stack **pStack); 								//Ïú»ÙÕ» 
-boolean resetStack(Stack *stack);									//ÖØÖÃÕ» 
-boolean isEmpty(Stack stack);										//ÅĞ¿Õ 
-boolean isFull(Stack stack);										//ÅĞÂú 
-int push(Stack *stack, USER_TYPE value);							//ÈëÕ» 
-boolean pop(Stack *stack, USER_TYPE *value);						//³öÕ» 
-boolean readStackTop(Stack stack, USER_TYPE *value);				//¶ÁÕ»¶¥ÔªËØ 
+boolean initStack(Stack **pStack, int capacity);					//åˆå§‹åŒ– 
+boolean destroyStack(Stack **pStack); 							//é”€æ¯æ ˆ 
+boolean resetStack(Stack *stack);							//é‡ç½®æ ˆ 
+boolean isEmpty(Stack stack);								//åˆ¤ç©º 
+boolean isFull(Stack stack);								//åˆ¤æ»¡ 
+int push(Stack *stack, USER_TYPE value);						//å…¥æ ˆ 
+boolean pop(Stack *stack, USER_TYPE *value);						//å‡ºæ ˆ 
+boolean readStackTop(Stack stack, USER_TYPE *value);					//è¯»æ ˆé¡¶å…ƒç´  
 
 boolean readStackTop(Stack stack, USER_TYPE *value) {
 	if (TRUE == isEmpty(stack)) {
@@ -111,7 +111,7 @@ int main(void) {
 	initStack(&stack, 10);
 	push(stack, one);
 	if (push(stack, &temp) == FALSE) {
-		puts("¶ÁÈ¡Ê§°Ü!");
+		puts("è¯»å–å¤±è´¥!");
 	} else {
 		printf("(%d, %d)", temp.row, temp.col);
 	}
