@@ -8,7 +8,7 @@
 typedef unsigned char boolean;
 
 /*
- ±íÊ¾Æ½ÃæÉÏµÄµã 
+ è¡¨ç¤ºå¹³é¢ä¸Šçš„ç‚¹ 
 */ 
 typedef struct Point {
 	int row;
@@ -21,39 +21,39 @@ typedef struct Linear {
 	USER_TYPE *arrays; 
 } Linear;
 
-boolean initLinearList(Linear **pLinear, int capacity); 					//³õÊ¼»¯ÏßĞÔ±í						
-boolean destroyLinearList(Linear **pLinear);								//Ïú»ÙÏßĞÔ±í 
-void iterator(Linear linear, void (*operatorValue)(USER_TYPE value)); 		//¶ÔÁĞ±í½øĞĞµü´ú 
-boolean resetLinearList(Linear *linear);									//ÖØÖÃÏßĞÔ±í 
-int getLength(Linear linear);												//µÃµ½ÏßĞÔ±í³¤¶È 
-boolean isEmpty(Linear linear);												//ÅĞ¿Õ 
-boolean isFull(Linear linear);												//ÅĞÂú
-boolean append(Linear *linear, USER_TYPE value);							//×·¼Ó 
-boolean deleteElementByIndex(Linear *linear, int index);					//É¾³ı 
-boolean getElementByIndex(Linear *linear, int index, USER_TYPE *value);		//²é¿´ 
-boolean modifyElementByIndex(Linear *linear, int index, USER_TYPE value);	//ĞŞ¸Ä
-boolean insertElement(Linear *linear, int index, USER_TYPE value);			//²åÈë 
-int indexOf(Linear linear, USER_TYPE value, 								//µÃµ½µÚÒ»¸öÆ¥ÅäµÄÔªËØÏÂ±ê 
+boolean initLinearList(Linear **pLinear, int capacity); 					//åˆå§‹åŒ–çº¿æ€§è¡¨						
+boolean destroyLinearList(Linear **pLinear);							//é”€æ¯çº¿æ€§è¡¨ 
+void iterator(Linear linear, void (*operatorValue)(USER_TYPE value)); 				//å¯¹åˆ—è¡¨è¿›è¡Œè¿­ä»£ 
+boolean resetLinearList(Linear *linear);							//é‡ç½®çº¿æ€§è¡¨ 
+int getLength(Linear linear);									//å¾—åˆ°çº¿æ€§è¡¨é•¿åº¦ 
+boolean isEmpty(Linear linear);									//åˆ¤ç©º 
+boolean isFull(Linear linear);									//åˆ¤æ»¡
+boolean append(Linear *linear, USER_TYPE value);						//è¿½åŠ  
+boolean deleteElementByIndex(Linear *linear, int index);					//åˆ é™¤ 
+boolean getElementByIndex(Linear *linear, int index, USER_TYPE *value);				//æŸ¥çœ‹ 
+boolean modifyElementByIndex(Linear *linear, int index, USER_TYPE value);			//ä¿®æ”¹
+boolean insertElement(Linear *linear, int index, USER_TYPE value);				//æ’å…¥ 
+int indexOf(Linear linear, USER_TYPE value, 							//å¾—åˆ°ç¬¬ä¸€ä¸ªåŒ¹é…çš„å…ƒç´ ä¸‹æ ‡ 
 	boolean (*equals)(USER_TYPE one, USER_TYPE two)); 		
-void bubbleSortList(Linear *linear, boolean isAscending,    				//ÅÅĞò                 	
+void bubbleSortList(Linear *linear, boolean isAscending,    					//æ’åº                 	
 	boolean (*oneGreaterThanTwo)(USER_TYPE one, USER_TYPE two));     	
 
-void printOneElement(Point point);											//ÓÃ»§ÊµÏÖµÄ´òÓ¡Ò»¸öÔªËØ º¯Êı 
-boolean oneGreaterThanTwo(Point one, Point two);    						//ÓÃ»§ÊµÏÖµÄ±È½Ï´óĞ¡ 	
-boolean equals(Point one, Point two);										//ÓÃ»§ÊµÏÖµÄ±È½ÏÊÇ·ñÏàµÈ 
+void printOneElement(Point point);								//ç”¨æˆ·å®ç°çš„æ‰“å°ä¸€ä¸ªå…ƒç´  å‡½æ•° 
+boolean oneGreaterThanTwo(Point one, Point two);    						//ç”¨æˆ·å®ç°çš„æ¯”è¾ƒå¤§å° 	
+boolean equals(Point one, Point two);								//ç”¨æˆ·å®ç°çš„æ¯”è¾ƒæ˜¯å¦ç›¸ç­‰ 
 
 /*
- ÓÃ»§ÊµÏÖµÄ´òÓ¡Ò»¸öÔªËØ
- point:µã×ø±ê 
+ ç”¨æˆ·å®ç°çš„æ‰“å°ä¸€ä¸ªå…ƒç´ 
+ point:ç‚¹åæ ‡ 
 */
 void printOneElement(Point point) {
 	printf("(%d,%d)\n", point.row, point.col);
 }
 
 /*
- ÓÉÓÃ»§ÊµÏÖµÄ±È½Ï´óĞ¡º¯Êı£¬Èôone > two£¬·µ»ØTRUE
- one:´ı±È½ÏÊı¾İ 
- two:´ı±È½ÏÊı¾İ 
+ ç”±ç”¨æˆ·å®ç°çš„æ¯”è¾ƒå¤§å°å‡½æ•°ï¼Œè‹¥one > twoï¼Œè¿”å›TRUE
+ one:å¾…æ¯”è¾ƒæ•°æ® 
+ two:å¾…æ¯”è¾ƒæ•°æ® 
 */  
 boolean oneGreaterThanTwo(Point one, Point two) {
 	if (((one.row*one.row + one.col*one.col) 
@@ -64,9 +64,9 @@ boolean oneGreaterThanTwo(Point one, Point two) {
 }
 
 /*
- ÓÃ»§¶¨ÒåµÄ±È½ÏÏàµÈº¯Êı 
- one:´ı±È½ÏÊı¾İ 
- two:´ı±È½ÏÊı¾İ 
+ ç”¨æˆ·å®šä¹‰çš„æ¯”è¾ƒç›¸ç­‰å‡½æ•° 
+ one:å¾…æ¯”è¾ƒæ•°æ® 
+ two:å¾…æ¯”è¾ƒæ•°æ® 
 */
 boolean equals(Point one, Point two) {
 	if (one.row	== two.row && one.col == two.col) {
@@ -76,10 +76,10 @@ boolean equals(Point one, Point two) {
 }
 
 /*
- ½øĞĞÃ°ÅİÅÅĞò
- linear:Ö¸ÏòÏßĞÔ±íµÄÖ¸Õë
- isAscending:ÊÇ·ñÉıĞò¡£TRUEÎªÉıĞò£¬FALSEÎª½µĞò
- oneGreaterThanTwo:±È½Ï´óĞ¡º¯Êı 
+ è¿›è¡Œå†’æ³¡æ’åº
+ linear:æŒ‡å‘çº¿æ€§è¡¨çš„æŒ‡é’ˆ
+ isAscending:æ˜¯å¦å‡åºã€‚TRUEä¸ºå‡åºï¼ŒFALSEä¸ºé™åº
+ oneGreaterThanTwo:æ¯”è¾ƒå¤§å°å‡½æ•° 
 */
 void bubbleSortList(Linear *linear, boolean isAscending,                    
 	boolean (*oneGreaterThanTwo)(USER_TYPE one, USER_TYPE two)) {
@@ -102,10 +102,10 @@ void bubbleSortList(Linear *linear, boolean isAscending,
 } 
 
 /*
- µÃµ½Æ¥ÅäµÄµÚÒ»¸öÔªËØÏÂ±ê
- linear:ÏßĞÔ±íÊµÀı
- value:´ı²éÕÒÔªËØ
- equals£º±È½Ïº¯Êı 
+ å¾—åˆ°åŒ¹é…çš„ç¬¬ä¸€ä¸ªå…ƒç´ ä¸‹æ ‡
+ linear:çº¿æ€§è¡¨å®ä¾‹
+ value:å¾…æŸ¥æ‰¾å…ƒç´ 
+ equalsï¼šæ¯”è¾ƒå‡½æ•° 
 */
 int indexOf(Linear linear, USER_TYPE value, boolean (*equals)(USER_TYPE one, USER_TYPE two)) {
 	int len = linear.count;
@@ -119,10 +119,10 @@ int indexOf(Linear linear, USER_TYPE value, boolean (*equals)(USER_TYPE one, USE
 }
 
 /*
- ÏòÖ¸¶¨Î»ÖÃ²åÈëÊı¾İ 
- linear:Ö¸ÏòÏßĞÔ±íµÄÖ¸Õë
- index:²åÈëÎ»ÖÃ
- value:²åÈëÊı¾İ 
+ å‘æŒ‡å®šä½ç½®æ’å…¥æ•°æ® 
+ linear:æŒ‡å‘çº¿æ€§è¡¨çš„æŒ‡é’ˆ
+ index:æ’å…¥ä½ç½®
+ value:æ’å…¥æ•°æ® 
 */
 boolean insertElement(Linear *linear, int index, USER_TYPE value) {
 	int i; 
@@ -141,10 +141,10 @@ boolean insertElement(Linear *linear, int index, USER_TYPE value) {
 } 
 
 /*
- ĞŞ¸ÄÖ¸¶¨Î»ÖÃÔªËØ 
- linear:Ö¸ÏòÏßĞÔ±íµÄÖ¸Õë 
- index:ĞŞ¸ÄÎ»ÖÃ
- value:ĞŞ¸ÄµÄÔªËØ 
+ ä¿®æ”¹æŒ‡å®šä½ç½®å…ƒç´  
+ linear:æŒ‡å‘çº¿æ€§è¡¨çš„æŒ‡é’ˆ 
+ index:ä¿®æ”¹ä½ç½®
+ value:ä¿®æ”¹çš„å…ƒç´  
 */
 boolean modifyElementByIndex(Linear *linear, int index, USER_TYPE value) {
 	if (linear == NULL || TRUE == isEmpty(*linear)
@@ -156,10 +156,10 @@ boolean modifyElementByIndex(Linear *linear, int index, USER_TYPE value) {
 }
 
 /*
- ²é¿´Ö¸¶¨Î»ÖÃÔªËØ
- linear:Ö¸ÏòÏßĞÔ±íµÄÖ¸Õë 
- index:²é¿´Î»ÖÃ
- value:·µ»ØµÄÊı¾İ 
+ æŸ¥çœ‹æŒ‡å®šä½ç½®å…ƒç´ 
+ linear:æŒ‡å‘çº¿æ€§è¡¨çš„æŒ‡é’ˆ 
+ index:æŸ¥çœ‹ä½ç½®
+ value:è¿”å›çš„æ•°æ® 
 */
 boolean getElementByIndex(Linear *linear, int index, USER_TYPE *value) {
 	if (linear == NULL || TRUE == isEmpty(*linear)
@@ -172,9 +172,9 @@ boolean getElementByIndex(Linear *linear, int index, USER_TYPE *value) {
 } 
 
 /*
- É¾³ıÖ¸¶¨Î»ÖÃÔªËØ
- linear:Ö¸ÏòÏßĞÔ±íµÄÖ¸Õë 
- index:É¾³ıÔªËØÏÂ±ê 
+ åˆ é™¤æŒ‡å®šä½ç½®å…ƒç´ 
+ linear:æŒ‡å‘çº¿æ€§è¡¨çš„æŒ‡é’ˆ 
+ index:åˆ é™¤å…ƒç´ ä¸‹æ ‡ 
 */
 boolean deleteElementByIndex(Linear *linear, int index) {
 	int i;
@@ -191,9 +191,9 @@ boolean deleteElementByIndex(Linear *linear, int index) {
 }
 
 /*
- ×·¼ÓÔªËØ
- linear:Ö¸ÏòÏßĞÔ±íµÄÖ¸Õë 
- value:´ı×·¼ÓÔªËØ  
+ è¿½åŠ å…ƒç´ 
+ linear:æŒ‡å‘çº¿æ€§è¡¨çš„æŒ‡é’ˆ 
+ value:å¾…è¿½åŠ å…ƒç´   
 */
 boolean append(Linear *linear, USER_TYPE value) {
 	if (linear == NULL || TRUE == isFull(*linear)) {
@@ -204,32 +204,32 @@ boolean append(Linear *linear, USER_TYPE value) {
 }
 
 /*
- ÅĞÂú
- linear:ÏßĞÔ±íÊµÀı 
+ åˆ¤æ»¡
+ linear:çº¿æ€§è¡¨å®ä¾‹ 
 */
 boolean isFull(Linear linear) {
 	return linear.count == linear.capacity;
 }
 
 /*
- ÅĞ¿Õ 
- linear:ÏßĞÔ±íÊµÀı 
+ åˆ¤ç©º 
+ linear:çº¿æ€§è¡¨å®ä¾‹ 
 */
 boolean isEmpty(Linear linear) {
 	return linear.count == 0;
 }
 
 /*
- µÃµ½ÏßĞÔ±í³¤¶È 
- linear:ÏßĞÔ±íÊµÀı 
+ å¾—åˆ°çº¿æ€§è¡¨é•¿åº¦ 
+ linear:çº¿æ€§è¡¨å®ä¾‹ 
 */
 int getLength(Linear linear) {
 	return linear.count;
 }
 
 /*
- ÖØÖÃÏßĞÔ±í
- linear:Ö¸ÏòÏßĞÔ±íµÄÖ¸Õë 
+ é‡ç½®çº¿æ€§è¡¨
+ linear:æŒ‡å‘çº¿æ€§è¡¨çš„æŒ‡é’ˆ 
 */
 boolean resetLinearList(Linear *linear) {
 	if (linear == NULL) {
@@ -240,9 +240,9 @@ boolean resetLinearList(Linear *linear) {
 }
 
 /*
- ¶ÔÏßĞÔ±í½øĞĞµü´ú 
- linear:ÏßĞÔ±íÊµÀı
- operatorValue:¶ÔÔªËØ²Ù×÷µÄº¯Êı 
+ å¯¹çº¿æ€§è¡¨è¿›è¡Œè¿­ä»£ 
+ linear:çº¿æ€§è¡¨å®ä¾‹
+ operatorValue:å¯¹å…ƒç´ æ“ä½œçš„å‡½æ•° 
 */
 void iterator(Linear linear, void (*operatorValue)(USER_TYPE value)) {
 	int len = linear.count;
@@ -253,8 +253,8 @@ void iterator(Linear linear, void (*operatorValue)(USER_TYPE value)) {
 }
 
 /*
- Ïú»ÙÁ´±í£¬ÊÍ·ÅËùÓĞ¿Õ¼ä
- linear:Ö¸ÏòÏßĞÔ±íÖ¸ÕëµÄµØÖ· 
+ é”€æ¯é“¾è¡¨ï¼Œé‡Šæ”¾æ‰€æœ‰ç©ºé—´
+ linear:æŒ‡å‘çº¿æ€§è¡¨æŒ‡é’ˆçš„åœ°å€ 
 */ 
 boolean destroyLinearList(Linear **pLinear) {
 	if (*pLinear == NULL) {
@@ -268,9 +268,9 @@ boolean destroyLinearList(Linear **pLinear) {
 }
 
 /*
- ³õÊ¼»¯ÏßĞÔ±í 
- linear:Ö¸ÏòÏßĞÔ±íÖ¸ÕëµÄµØÖ·
- capacity:ÈİÁ¿
+ åˆå§‹åŒ–çº¿æ€§è¡¨ 
+ linear:æŒ‡å‘çº¿æ€§è¡¨æŒ‡é’ˆçš„åœ°å€
+ capacity:å®¹é‡
 */
 boolean initLinearList(Linear **pLinear, int capacity) {
 	if (*pLinear != NULL) {
@@ -295,7 +295,7 @@ int main(void) {
 	initLinearList(&linear, 20);
 	remainCapacity = 10 - getLength(*linear); 
 	while (remainCapacity-- > 0) { 
-		one.row = one.col= remainCapacity;						//Ìî³äÏßĞÔ±í 
+		one.row = one.col= remainCapacity;						//å¡«å……çº¿æ€§è¡¨ 
 		append(linear, one);
 	}
 	append(linear, one);
@@ -304,7 +304,7 @@ int main(void) {
 	//bubbleSortList(linear, TRUE, oneGreaterThanTwo); 
 	iterator(*linear, printOneElement);
 	
-	printf("µ±Ç°ÏßĞÔ±í³¤¶È:[%d]\n" , getLength(*linear));
+	printf("å½“å‰çº¿æ€§è¡¨é•¿åº¦:[%d]\n" , getLength(*linear));
 	
 	return 0;
 }
