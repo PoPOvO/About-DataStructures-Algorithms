@@ -270,7 +270,7 @@ boolean destroyLinearList(Linear **pLinear) {
 /*
  初始化线性表 
  linear:指向线性表指针的地址
- capacity:容量GREFFFDXC 
+ capacity:容量
 */
 boolean initLinearList(Linear **pLinear, int capacity) {
 	if (*pLinear != NULL) {
