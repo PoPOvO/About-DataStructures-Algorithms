@@ -7,7 +7,7 @@
 `value`:数据域
 `pointer`:指向其后继节点的指针
 
-遍历条件:while (ptr != NULL)
+遍历条件:`while (ptr != NULL)`
 
 基本功能:
 
@@ -31,7 +31,8 @@
 `next`:指向后继节点的指针
 `prev`:指向前驱节点的指针
 
-遍历结束条件:while (ptr != head)
+遍历条件:`while (ptr != head)`
+
 对于不带头节点的双向循环链表, 第一个节点的地址就是head，因此ptr的初值是head->next，需要将第一个节点和其他节点分开处理)
 
 相对于单向链表的优势:
