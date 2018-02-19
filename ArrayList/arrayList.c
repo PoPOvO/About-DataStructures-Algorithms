@@ -304,7 +304,7 @@ int main(void) {
 	//bubbleSortList(linear, TRUE, oneGreaterThanTwo); 
 	iterator(*linear, printOneElement);
 	
-	printf("当前线性表长度:[%d]\n" , getLength(*linear));
+	printf("current linear length:[%d]\n" , getLength(*linear));
 	
 	return 0;
 }

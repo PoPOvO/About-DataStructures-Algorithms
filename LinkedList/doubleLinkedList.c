@@ -32,7 +32,7 @@ void printLinkedList(Node *head);
 
 void printLinkedList(Node *head) {
 	Node *ptr = head->next;
-	puts("结果如下:");
+	puts("result:");
 
 	//先打印头节点 
 	printf("(%d, %d)", head->value.row, head->value.col); 
@@ -87,7 +87,7 @@ boolean initLinkedList(Node **pHead, boolean (*inputValue)(USER_TYPE*)) {
 }
 
 boolean inputPoint(Point *point) {
-	printf("输入点坐标(ctrl+Z结束):");
+	printf("input point('ctrl+Z' exit):");
 	return 2 == scanf("%d%d", &(point->row), &(point->col)); 
 }
 

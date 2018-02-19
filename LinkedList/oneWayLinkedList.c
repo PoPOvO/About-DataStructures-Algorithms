@@ -28,7 +28,7 @@ boolean destoryLinkedList(Node **pHead);                                 //销�
 void printLinkedList(Node *head);					 //打印链表 
 boolean appendValue(Node* head, USER_TYPE value);                        //追加 
 boolean insertNode(Node **pHead, USER_TYPE value, int pos);         	 //插入 
-boolean deleteNodeByIndex(Node **pHead, int pos);                        //删除节点 
+USER_TYPE deleteNodeByIndex(Node **pHead, int pos);                        //删除节点 
 boolean getValueByIndex(Node *head, USER_TYPE *value, int index);        //查看节点数据 
 boolean modifyNodeByIndex(Node *head, USER_TYPE value, int index);       //修改节点数据 
 int getLength(Node *head);                                               //获取链表长度 
@@ -47,7 +47,7 @@ boolean inputPoint(Point *point);					 //用户实现的输入函数
  *point:一个点坐标数据 
 */ 
 boolean inputPoint(Point *point) {
-	printf("输入点坐标(ctrl+Z结束):");
+	printf("input point('ctrl+Z' exit):");
 	return 2 == scanf("%d%d", &(point->row), &(point->col)); 
 }
 
@@ -202,33 +202,36 @@ boolean getValueByIndex(Node *head, USER_TYPE *value, int index) {
  pHead:指向头节点的指针的地址 
  pos:删除节点下标 
 */ 
-boolean deleteNodeByIndex(Node **pHead, int pos) {	
+USER_TYPE deleteNodeByIndex(Node **pHead, int pos) {	
 	Node *prev;
 	Node *temp = *pHead;
+	USER_TYPE value;
 	int len = getLength(*pHead); 
 	if (pos < 0 || pos > len-1 || *pHead == NULL) {
-		return FALSE;
+		exit(0);
 	}
 
 	//删除头节点 
 	if (pos == 0) {
 		prev = *pHead;
+		value = prev->value;
 		*pHead = (*pHead)->next;
 		free(prev);
 		prev = NULL;
-		return TRUE;
+		return value;
 	}
 	
 	while (temp != NULL) {
 		if (pos-- == 0) {
 			prev->next = temp->next;
+			value = temp->value;
 			free(temp);	
-			return TRUE;				
+			return value;				
 		}
 		prev = temp;
 		temp = temp->next;
 	}
-	return FALSE;
+	exit(0);
 }
 
 /*
@@ -293,7 +296,7 @@ boolean appendValue(Node* head, USER_TYPE value) {
  head:链表头结点地址 
 */
 void printLinkedList(Node *head) {
-	puts("结果如下：");
+	puts("resule:");
 	while (head != NULL) {
 		printf("(%d,%d) ", head->value.row, head->value.col);
 		head = head->next;
