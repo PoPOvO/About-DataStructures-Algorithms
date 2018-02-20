@@ -54,7 +54,7 @@ in,out 的取值范围是 `[0, capacity)`
 假设 capacity = 8;
 当out = 0, in = 7时，队列存在7个元素;
 
-当out = 0, in = 8时，队列存在8个元素;
+当out = 0, in = 4时，队列存在4个元素;
 
 当out = 5, in = 0是，队列存在3个元素。 
 因此可得出 `elementCount = (in - out + capacity) % capacity`
