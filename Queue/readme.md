@@ -24,7 +24,7 @@ QueueFull条件：`out == (in+1) % capacity`
 
 (2) 使用全部存储位置，在结构体中增加一个控制变量，用它来判断。
 例如：增加一个boolean类型的变量`isLastIn`。
-在向最后一个位置添加元素时时，令`isLastIn = TRUE`。
+在向最后一个位置添加元素时，令`isLastIn = TRUE`。
 在In函数中增加： 
 
 ```c
@@ -50,6 +50,8 @@ in,out 的取值范围是 `[0, capacity)`
 
 假设 capacity = 8;
 当out = 0, in = 7时，队列存在7个元素;
+
 当out = 0, in = 8时，队列存在8个元素;
+
 当out = 5, in = 0是，队列存在3个元素。 
 因此可得出 `elementCount = (in - out + capacity) % capacity`
