@@ -1,6 +1,7 @@
 # 顺序队列
 
 ![](./pic/20180220234959.png)
+
 队列是一种特殊的线性表，其规则是先进先出，可以采用顺序方式实现。但使用数组实现的顺序队列会产生“假满”，入队时，in后移，出队时out后移，
 当到达最后一个位置时，in和out已经不能增长，但是out前面的位置都是空余的，但已经不能存储元素了。因此**使用数组实现时使用循环结构，使用链表实现可以构造顺序队列(append和delete组合实现)。**
 
@@ -25,14 +26,18 @@
 	例如：增加一个boolean类型的变量`isLastIn`。
 	在向最后一个位置添加元素时时，令`isLastIn = TRUE`
 	在In函数中增加： 
+		```
 		if ((in - out + capacity) % capacity == (capacity - 1)) {
 			isLastIn = TRUE;
 		}
-	只要进行出队操作，就将isLastIn = FALSE; 
+		```
+	只要进行出队操作，就将`isLastIn = FALSE`
 	在Out函数增加：
+		```
 		if (isLastIn == TRUE) {
 			isLastIn = FALSE;
 		} 
+		```
 		
 	此时：
 	QueueEmpty条件：`(in == out) && (isLastIn == FALSE)`
@@ -40,6 +45,7 @@
   
   2. 队列元素个数的确定：
 	in,out 的取值范围是 `[0, capacity)`
+	
 	假设 capacity = 8;
 	当out = 0, in = 7时，队列存在7个元素;
 	当out = 0, in = 8时，队列存在8个元素;
