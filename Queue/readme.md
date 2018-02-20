@@ -47,7 +47,8 @@ if (isLastIn == TRUE) {
 QueueEmpty条件：`(in == out) && (isLastIn == FALSE)`
 QueueFull条件：`isLastIn == TRUE` 
 
-2. 队列元素个数的确定：
+2. 队列元素个数的确定
+
 in,out 的取值范围是 `[0, capacity)`
 
 假设 capacity = 8;
