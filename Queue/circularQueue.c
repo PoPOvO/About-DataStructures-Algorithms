@@ -18,22 +18,22 @@ typedef struct Point {
 } Point, USER_TYPE;
 
 typedef struct {
-	int in;
-	int out;
-	int capacity;
-	USER_TYPE *arrays;
-	boolean isLastIn; 
+	int in;			//入队指针，指向下一个空白位置
+	int out;		//出队指针，指向待出队元素
+	int capacity;		//队列容量
+	USER_TYPE *arrays;	//数组
+	boolean isLastIn; 	//用来判断最后一个空白位置是否被填充
 } Queue;
 
-boolean initQueue(Queue **pQueue, int capacity);
-boolean destroyQueue(Queue **pQueue);
-boolean resetQueue(Queue *queue);
-boolean isFull(Queue queue);
-boolean isEmpty(Queue queue);
-int getElementCount(Queue queue);
-boolean elementIn(Queue *queue, USER_TYPE value);
-boolean elementOut(Queue *queue, USER_TYPE *value);
-boolean readQueueTail(Queue queue, USER_TYPE *value);
+boolean initQueue(Queue **pQueue, int capacity);		//初始化队列
+boolean destroyQueue(Queue **pQueue);				//销毁队列，释放空间
+boolean resetQueue(Queue *queue);				//重置队列
+boolean isFull(Queue queue);					//判满
+boolean isEmpty(Queue queue);					//判空
+int getElementCount(Queue queue);				//得到队列元素个数
+boolean elementIn(Queue *queue, USER_TYPE value);		//入队
+boolean elementOut(Queue *queue, USER_TYPE *value);		//出队
+boolean readQueueTail(Queue queue, USER_TYPE *value);		//读队尾
 
 boolean readQueueTail(Queue queue, USER_TYPE *value) {
 	if (isEmpty(queue)) {
