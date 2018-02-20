@@ -15,7 +15,7 @@
 *	出队
 *	读队尾
 
-1. 实现循环队列时，需要判满、判空。当`head = tail`时，可能为空，也可能为满，就造成无法识别的情况。
+1. 实现循环队列时，需要判满、判空。当`in = out`时，可能为空，也可能为满，就造成无法识别的情况。
 这种情况可采用两种方式解决：
 
 	(1) 对于n个存储位置，只使用n-1个位置。此时： 	
@@ -24,20 +24,20 @@
 	
 	(2) 使用全部存储位置，在结构体中增加一个控制变量，用它来判断。
 	例如：增加一个boolean类型的变量`isLastIn`。
-	在向最后一个位置添加元素时时，令`isLastIn = TRUE`
+	在向最后一个位置添加元素时时，令`isLastIn = TRUE`。
 	在In函数中增加： 
-		```
-		if ((in - out + capacity) % capacity == (capacity - 1)) {
-			isLastIn = TRUE;
-		}
-		```
-	只要进行出队操作，就将`isLastIn = FALSE`
+```
+if ((in - out + capacity) % capacity == (capacity - 1)) {
+	isLastIn = TRUE;
+}
+```
+	只要进行出队操作，就将`isLastIn = FALSE`。
 	在Out函数增加：
-		```
-		if (isLastIn == TRUE) {
-			isLastIn = FALSE;
-		} 
-		```
+```
+if (isLastIn == TRUE) {
+	isLastIn = FALSE;
+} 
+```
 		
 	此时：
 	QueueEmpty条件：`(in == out) && (isLastIn == FALSE)`
