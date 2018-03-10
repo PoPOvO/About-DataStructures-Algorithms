@@ -64,7 +64,7 @@ while (!isEmpty(queue)) {
     eleIn(rootNode.right);
 }
 ```  
-    > 遍历结果：A B C D E F G H I J K L M
+> 遍历结果：A B C D E F G H I J K L M
 
 *   深度优先遍历(借用堆栈)
 ```    
