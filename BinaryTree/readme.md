@@ -55,26 +55,26 @@
 ## 树的遍历
 
 ![](./pic/20180310193952.png)
-
 *   广度优先遍历(借用队列)
-
-    <span class="hljs-attribute">eleIn</span>(rootNode);                    <span class="hljs-comment">//根节点入队</span>
-    <span class="hljs-tag">while</span> (!<span class="hljs-function">isEmpty</span>(queue)) {
-        <span class="hljs-attribute">printf</span>(<span class="hljs-string">"……"</span>, <span class="hljs-function">enlOut</span>(queue));    <span class="hljs-comment">//出队</span>
-        <span class="hljs-attribute">eleIn</span>(rootNode.left);            <span class="hljs-comment">//子节点入队</span>
-        <span class="hljs-attribute">eleIn</span>(rootNode.right);
-    }
-    `</pre>
+```
+eleIn(rootNode);                   				//根节点入队
+while (!isEmpty(queue)) {
+    printf("……", enlOut(queue));    			//出队
+    eleIn(rootNode.left);            			//子节点入队
+    eleIn(rootNode.right);
+}
+```  
     > 遍历结果：A B C D E F G H I J K L M
 
 *   深度优先遍历(借用堆栈)
-    <pre>`<span class="hljs-attribute">push</span>(rootNode);                    <span class="hljs-comment">//根节点入栈</span>
-    <span class="hljs-tag">while</span> (!<span class="hljs-function">isEmpty</span>(stack)) {
-        <span class="hljs-attribute">printf</span>(<span class="hljs-string">"……"</span>, <span class="hljs-function">pop</span>(stack));    <span class="hljs-comment">//出栈</span>
-        <span class="hljs-attribute">push</span>(rootNode.right);        <span class="hljs-comment">//子节点入栈</span>
-        <span class="hljs-attribute">push</span>(rootNode.left);
-    }
-
+```    
+push(rootNode);                    				//根节点入栈
+while (!isEmpty(stack)) {
+    printf("……", pop(stack));   		 		//出栈
+    push(rootNode.right);       				//子节点入栈
+    push(rootNode.left);
+}
+```
 > 遍历结果：A B E H I L F C D G L K M
 
 ## 二叉树的遍历
