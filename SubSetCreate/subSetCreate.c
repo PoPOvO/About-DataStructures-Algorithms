@@ -3,8 +3,8 @@
 #include<math.h>
 
 /*
- ½¨Á¢Ò»¸ö×Ó¼¯
- str:×Ó¼¯ÐòÁÐ 
+ å»ºç«‹ä¸€ä¸ªå­é›†
+ str:å­é›†åºåˆ— 
 */ 
 void createSubset(char *str);
 
@@ -12,14 +12,14 @@ void createSubset(char *str) {
 	int i;
 	static int count = 0;
 	
-	for(i = strlen(str) - 1; i >= 0 && str[i] == '1'; i--);  //´ÓÓÒÏò×ó±éÀú×Ö·û´®£¬ÕÒµ½×îÓÒ±ß0µÄÏÂ±ê 
-	if(i >= 0){ 											 //½«×îÓÒ0ºóµÄÔªËØ¶¼ÖÃ0 
+	for(i = strlen(str) - 1; i >= 0 && str[i] == '1'; i--);  //ä»Žå³å‘å·¦éåŽ†å­—ç¬¦ä¸²ï¼Œæ‰¾åˆ°æœ€å³è¾¹0çš„ä¸‹æ ‡ 
+	if(i >= 0){ 						 //å°†æœ€å³0åŽçš„å…ƒç´ éƒ½ç½®0 
 		str[i] = '1';
 		for( ++i; str[i]; i++){
 			str[i] = '0';
 		} 
 	} 
-	printf("×Ó¼¯%d:%s\n", ++count, i >= 0 ? str : "¸Ã´®È«ÊÇ1"); 
+	printf("å­é›†%d:%s\n", ++count, i >= 0 ? str : "è¯¥ä¸²å…¨æ˜¯1"); 
 }
 
 int main(void) {
