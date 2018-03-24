@@ -1,3 +1,6 @@
+#ifndef _OneWayLinkedList_H_
+#define _OneWayLinkedList_H_
+
 /*
  不带头节点单向链表,每个节点存储用户输入的点坐标 
 */
@@ -10,14 +13,6 @@
 
 typedef unsigned char boolean;
 
-/*
- 表示平面上的点 
-*/ 
-typedef struct Point {
-	int row;
-	int col;
-} Point, USER_TYPE;
-
 typedef struct Node {
 	USER_TYPE value;
 	struct Node* next;
@@ -25,6 +20,7 @@ typedef struct Node {
 
 boolean initLinkedList(Node **pHead, boolean (*inputValue)(USER_TYPE*)); //初始化链表 
 boolean destoryLinkedList(Node **pHead);                                 //销毁链表 
+void printLinkedList(Node *head);					 //打印链表 
 boolean appendValue(Node* head, USER_TYPE value);                        //追加 
 boolean insertNode(Node **pHead, USER_TYPE value, int pos);         	 //插入 
 USER_TYPE deleteNodeByIndex(Node **pHead, int pos);                        //删除节点 
@@ -37,57 +33,6 @@ void bubbleSortList(Node *head, boolean isAscending,                     //排�
 	boolean (*comparaTo)(USER_TYPE one, USER_TYPE two));     
 boolean iterator(Node *head, void (*operatorValue)(USER_TYPE value));    //对链表进行迭代 
 void linkedListCopy(Node *target, Node **result);                        //对链表进行拷贝 
-
-boolean comparaTo(Point one, Point two);                         //用户实现的比较大小函数 
-boolean equals(Point one, Point two);					 //用户定义的比较相等函数
-boolean inputPoint(Point *point);					 //用户实现的输入函数 
-void printLinkedList(Node *head);					 //用户实现的打印链表 
-
-/*
- 打印链表元素到控制台
- head:链表头结点地址 
-*/
-void printLinkedList(Node *head) {
-	puts("result:");
-	while (head != NULL) {
-		printf("(%d,%d) ", head->value.row, head->value.col);
-		head = head->next;
-	}
-}
-
-/*
- 由用户实现的输入函数，用于读入一个值 。 
- *point:一个点坐标数据 
-*/ 
-boolean inputPoint(Point *point) {
-	printf("input point('ctrl+Z' exit):");
-	return 2 == scanf("%d%d", &(point->row), &(point->col)); 
-}
-
-/*
- 由用户实现的比较大小函数，若one > two，返回TRUE
- one:待比较数据 
- two:待比较数据 
-*/ 
-boolean comparaTo(Point one, Point two) {
-	if (((one.row*one.row + one.col*one.col) 
-		- (two.row*two.row + two.col*two.col)) > 0) {
-		return TRUE;
-	}
-	return FALSE;
-}
-
-/*
- 用户定义的比较相等函数 
- one:待比较数据 
- two:待比较数据 
-*/
-boolean equals(Point one, Point two) {
-	if (one.row	== two.row && one.col == two.col) {
-		return TRUE;
-	}	
-	return FALSE; 
-}
 
 /*
  对链表进行拷贝
@@ -330,7 +275,7 @@ boolean appendValue(Node* head, USER_TYPE value) {
 	head->next = NULL;
 	prev->next = head;
 	return TRUE;
-} 
+}
 
 /*
  销毁链表，释放所有节点。
@@ -381,29 +326,4 @@ boolean initLinkedList(Node **pHead, boolean (*inputValue)(USER_TYPE*)) {
 	return TRUE;
 }
 
-/*
-1 2 3 4 5 6 7 8
-*/
-int main(void) {
-	LinkedList head = NULL;
-	LinkedList copyHead = NULL;
-	Point temp = {
-		0,
-		0	
-	};
-	
- 	initLinkedList(&head, inputPoint);
- 	modifyNodeByIndex(head, temp, 3);
-	//appendValue(head, temp);
-	insertNode(&head, temp, 2);
-	bubbleSortList(head, FALSE, comparaTo); 
-	printLinkedList(head);
-	printf("\nIndex:%d\n", indexOf(head, temp, equals));
-	
-	linkedListCopy(head, &copyHead);
-	printLinkedList(copyHead);
-	
- 	destoryLinkedList(&head);
- 	destoryLinkedList(&copyHead);
-	return 0;
-}
+#endif

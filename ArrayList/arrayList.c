@@ -36,10 +36,10 @@ boolean insertElement(Linear *linear, int index, USER_TYPE value);				//插入
 int indexOf(Linear linear, USER_TYPE value, 							//得到第一个匹配的元素下标 
 	boolean (*equals)(USER_TYPE one, USER_TYPE two)); 		
 void bubbleSortList(Linear *linear, boolean isAscending,    					//排序                 	
-	boolean (*oneGreaterThanTwo)(USER_TYPE one, USER_TYPE two));     	
+	boolean (*comparaTo)(USER_TYPE one, USER_TYPE two));     	
 
 void printOneElement(Point point);								//用户实现的打印一个元素 函数 
-boolean oneGreaterThanTwo(Point one, Point two);    						//用户实现的比较大小 	
+boolean comparaTo(Point one, Point two);    						//用户实现的比较大小 	
 boolean equals(Point one, Point two);								//用户实现的比较是否相等 
 
 /*
@@ -55,7 +55,7 @@ void printOneElement(Point point) {
  one:待比较数据 
  two:待比较数据 
 */  
-boolean oneGreaterThanTwo(Point one, Point two) {
+boolean comparaTo(Point one, Point two) {
 	if (((one.row*one.row + one.col*one.col) 
 		- (two.row*two.row + two.col*two.col)) > 0) {
 		return TRUE;
@@ -79,10 +79,10 @@ boolean equals(Point one, Point two) {
  进行冒泡排序
  linear:指向线性表的指针
  isAscending:是否升序。TRUE为升序，FALSE为降序
- oneGreaterThanTwo:比较大小函数 
+ comparaTo:比较大小函数 
 */
 void bubbleSortList(Linear *linear, boolean isAscending,                    
-	boolean (*oneGreaterThanTwo)(USER_TYPE one, USER_TYPE two)) {
+	boolean (*comparaTo)(USER_TYPE one, USER_TYPE two)) {
 	int i,j;
 	boolean flag;
 	USER_TYPE temp;
@@ -90,8 +90,8 @@ void bubbleSortList(Linear *linear, boolean isAscending,
 	for (i = 0; i < linear->count-1; i++) {
 		for (j = 0; j < linear->count-i-1; j++) {
 			flag = (TRUE == isAscending) ?
-			oneGreaterThanTwo(linear->arrays[j], linear->arrays[j+1]) :
-			oneGreaterThanTwo(linear->arrays[j+1], linear->arrays[j]);
+			comparaTo(linear->arrays[j], linear->arrays[j+1]) :
+			comparaTo(linear->arrays[j+1], linear->arrays[j]);
 			if (flag) {
 				temp = linear->arrays[j];
 				linear->arrays[j] = linear->arrays[j+1];
@@ -301,7 +301,7 @@ int main(void) {
 	append(linear, one);
 	insertElement(linear, 0, one);
 	//modifyElementByIndex(linear, 1, one);
-	//bubbleSortList(linear, TRUE, oneGreaterThanTwo); 
+	//bubbleSortList(linear, TRUE, comparaTo); 
 	iterator(*linear, printOneElement);
 	
 	printf("current linear length:[%d]\n" , getLength(*linear));
