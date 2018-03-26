@@ -37,6 +37,7 @@ void bubbleSortList(Node *head, boolean isAscending,                     //排�
 	boolean (*comparaTo)(USER_TYPE one, USER_TYPE two));     
 boolean iterator(Node *head, void (*operatorValue)(USER_TYPE value));    //对链表进行迭代 
 void linkedListCopy(Node *target, Node **result);                        //对链表进行拷贝 
+void reverse(Node **pHead);                               //逆置链表 
 
 boolean comparaTo(Point one, Point two);                         //用户实现的比较大小函数 
 boolean equals(Point one, Point two);					 //用户定义的比较相等函数
@@ -88,6 +89,22 @@ boolean equals(Point one, Point two) {
 	}	
 	return FALSE; 
 }
+
+/*
+ 逆置链表
+ pHead:链表头指针的地址 
+*/
+void reverse(Node **pHead) {         //利用断节点方式 
+	Node *ptr = *pHead;
+	Node *temp = NULL;
+	
+	while (ptr->next != NULL) {
+		temp = ptr->next;
+		ptr->next = temp->next;
+		temp->next = *pHead;
+		*pHead = temp; 
+	}
+} 
 
 /*
  对链表进行拷贝
@@ -393,17 +410,19 @@ int main(void) {
 	};
 	
  	initLinkedList(&head, inputPoint);
- 	modifyNodeByIndex(head, temp, 3);
+ 	//modifyNodeByIndex(head, temp, 3);
 	//appendValue(head, temp);
-	insertNode(&head, temp, 2);
-	bubbleSortList(head, FALSE, comparaTo); 
+	//insertNode(&head, temp, 2);
+	bubbleSortList(head, FALSE, comparaTo);      //降序 
 	printLinkedList(head);
 	printf("\nIndex:%d\n", indexOf(head, temp, equals));
 	
 	linkedListCopy(head, &copyHead);
+	reverse(&copyHead);
 	printLinkedList(copyHead);
-	
+ 
  	destoryLinkedList(&head);
  	destoryLinkedList(&copyHead);
+ 	
 	return 0;
 }

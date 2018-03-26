@@ -37,6 +37,7 @@ int indexOf(Linear linear, USER_TYPE value, 							//得到第一个匹配的元
 	boolean (*equals)(USER_TYPE one, USER_TYPE two)); 		
 void bubbleSortList(Linear *linear, boolean isAscending,    					//排序                 	
 	boolean (*comparaTo)(USER_TYPE one, USER_TYPE two));     	
+void reverse(Linear linear);                                    //逆置线性表 
 
 void printOneElement(Point point);								//用户实现的打印一个元素 函数 
 boolean comparaTo(Point one, Point two);    						//用户实现的比较大小 	
@@ -74,6 +75,22 @@ boolean equals(Point one, Point two) {
 	}	
 	return FALSE; 
 }
+
+/*
+ 逆置线性表
+ linear:线性表实例 
+*/
+void reverse(Linear linear) {
+	int i = 0;
+	int count = linear.count/2;
+	USER_TYPE temp;
+	
+	for (i; i < count; i++) {
+		temp = linear.arrays[i];
+		linear.arrays[i] = linear.arrays[linear.count-i-1];
+		linear.arrays[linear.count-i-1] = temp;
+	}
+} 
 
 /*
  进行冒泡排序
@@ -294,6 +311,7 @@ int main(void) {
 	
 	initLinearList(&linear, 20);
 	remainCapacity = 10 - getLength(*linear); 
+
 	while (remainCapacity-- > 0) { 
 		one.row = one.col= remainCapacity;						//填充线性表 
 		append(linear, one);
@@ -302,6 +320,7 @@ int main(void) {
 	insertElement(linear, 0, one);
 	//modifyElementByIndex(linear, 1, one);
 	//bubbleSortList(linear, TRUE, comparaTo); 
+	//reverse(*linear); 
 	iterator(*linear, printOneElement);
 	
 	printf("current linear length:[%d]\n" , getLength(*linear));
