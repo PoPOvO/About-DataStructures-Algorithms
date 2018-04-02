@@ -1,12 +1,18 @@
 #include <stdio.h>
 
 typedef int USER_TYPE;
+typedef USER_TYPE *List;
 
-int search(USER_TYPE *arrays, int arrayLen, USER_TYPE value, int comparaTo(USER_TYPE one, USER_TYPE two));
-void bubbleSortList(USER_TYPE *arrays, int arrayLen, int (*comparaTo)(USER_TYPE one, USER_TYPE two));
+int search(List arrays, int arrayLen, USER_TYPE value, int comparaTo(USER_TYPE one, USER_TYPE two));
+void bubbleSortList(List arrays, int arrayLen, int (*comparaTo)(USER_TYPE one, USER_TYPE two));
 int comparaTo(USER_TYPE one, USER_TYPE two);
 void printList(USER_TYPE *arrays, int len);
 
+/*
+ 输出列表
+ arrays:USER_TYPE类型的数组
+ len:数组长度 
+*/
 void printList(USER_TYPE *arrays, int len) {
 	int i = 0;
 	
@@ -17,6 +23,10 @@ void printList(USER_TYPE *arrays, int len) {
 	printf("]\n");
 }
 
+/*
+ 用户实现的比较函数。若one>two，返回1，等于返回0，小于返回-1。 
+ one、two:待比较的量 
+*/
 int comparaTo(USER_TYPE one, USER_TYPE two) {
 	if (one > two) {
 		return 1;
@@ -26,7 +36,13 @@ int comparaTo(USER_TYPE one, USER_TYPE two) {
 	return 0;
 }
 
-void bubbleSortList(USER_TYPE *arrays, int arrayLen, int (*comparaTo)(USER_TYPE one, USER_TYPE two)) {
+/*
+ 冒泡升序
+  arrays:USER_TYPE的数组
+  arrayLen:数组长度
+  comparaTo:比较函数 
+*/
+void bubbleSortList(List arrays, int arrayLen, int (*comparaTo)(USER_TYPE one, USER_TYPE two)) {
 	int i,j;
 	USER_TYPE temp;
 	
@@ -41,7 +57,14 @@ void bubbleSortList(USER_TYPE *arrays, int arrayLen, int (*comparaTo)(USER_TYPE 
 	}
 }
 
-int search(USER_TYPE *arrays, int arrayLen, USER_TYPE value, int comparaTo(USER_TYPE one, USER_TYPE two)) {
+/*
+ 二分查找，成功返回匹配下标 ，否则返回-1.
+  arrays:USER_TYPE的数组
+  value:匹配元素 
+  arrayLen:数组长度
+  comparaTo:比较函数 
+*/
+int search(List arrays, int arrayLen, USER_TYPE value, int comparaTo(USER_TYPE one, USER_TYPE two)) {
 	int head = 0;
 	int tail = arrayLen-1;
 	int middle = (head + tail) / 2;
@@ -51,11 +74,10 @@ int search(USER_TYPE *arrays, int arrayLen, USER_TYPE value, int comparaTo(USER_
 			return middle;
 		} else if (1 == comparaTo(arrays[middle], value)) {
 			tail = middle-1;
-			middle = (head + tail) / 2;
-		} else if (-1 == comparaTo(arrays[middle], value)) {
-			head = middle+1;
-			middle = (head + tail) / 2;
+		} else { 
+			head = middle+1; 
 		}
+		middle = (head + tail) / 2;
 	}
 	return -1;
 }
