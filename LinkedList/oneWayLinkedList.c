@@ -94,7 +94,7 @@ boolean equals(Point one, Point two) {
  逆置链表
  pHead:链表头指针的地址 
 */
-void reverse(Node **pHead) {         //利用断节点方式 
+void reverse(Node **pHead) {         //利用断节点方式，即将下一个节点放到表头，直到不存在下一个节点 
 	Node *ptr = *pHead;
 	Node *temp = NULL;
 	
