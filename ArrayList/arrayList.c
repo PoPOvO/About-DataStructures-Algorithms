@@ -324,6 +324,7 @@ int main(void) {
 	iterator(*linear, printOneElement);
 	
 	printf("current linear length:[%d]\n" , getLength(*linear));
+	destroyLinearList(&linear);
 	
 	return 0;
 }
