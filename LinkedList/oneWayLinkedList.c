@@ -410,9 +410,9 @@ int main(void) {
 	};
 	
  	initLinkedList(&head, inputPoint);
- 	//modifyNodeByIndex(head, temp, 3);
-	//appendValue(head, temp);
-	//insertNode(&head, temp, 2);
+ 	modifyNodeByIndex(head, temp, 3);
+	appendValue(head, temp);
+	insertNode(&head, temp, 2);
 	bubbleSortList(head, FALSE, comparaTo);      //降序 
 	printLinkedList(head);
 	printf("\nIndex:%d\n", indexOf(head, temp, equals));
