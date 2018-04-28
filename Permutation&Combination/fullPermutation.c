@@ -8,8 +8,9 @@ void printArrays(int *arr, int len);
 
 void printArrays(int *arr, int len) {
 	int i = 0;
+	static int count = 1;
 	
-	printf("(%d", arr[i++]);
+	printf("%d:(%d", count++, arr[i++]);
 	for (i; i < len; i++)
 		printf(", %d", arr[i]);
 	printf(")\n");
@@ -18,7 +19,7 @@ void printArrays(int *arr, int len) {
 void fullPermutation(USER_TYPE *arr, int start, int len, void (*operatorArray)(USER_TYPE *arr, int len)) {
 	int i = start;
 	
-	if (start == len) {
+	if (start == len-1) {
 		operatorArray(arr, len);	
 	}
 	
@@ -38,10 +39,10 @@ void swap(USER_TYPE *p, USER_TYPE *q) {
 
 int main(void) {	
 	int arr[] = {
-		1, 2, 3	
+		1, 2, 3, 4	
 	};
 	
-	fullPermutation(arr, 0, 3, printArrays);
+	fullPermutation(arr, 0, 4, printArrays);
 	
 	return 0;
 }
