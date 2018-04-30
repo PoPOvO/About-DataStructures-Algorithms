@@ -16,10 +16,16 @@ void printArrays(int *arr, int len) {
 	printf(")\n");
 }
 
+/*
+ arr:原始集合
+ start:子集合在原始集合的其实下标
+ len:原始集合长度
+ operatorArray:对集合操作的函数 
+*/ 
 void fullPermutation(USER_TYPE *arr, int start, int len, void (*operatorArray)(USER_TYPE *arr, int len)) {
 	int i = start;
 	
-	if (start == len-1) {
+	if (start == len-1) {            //无子集时返回 
 		operatorArray(arr, len);	
 	}
 	
@@ -43,6 +49,6 @@ int main(void) {
 	};
 	
 	fullPermutation(arr, 0, 4, printArrays);
-	
+
 	return 0;
 }
