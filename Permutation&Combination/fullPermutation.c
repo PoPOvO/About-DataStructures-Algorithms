@@ -26,7 +26,8 @@ void fullPermutation(USER_TYPE *arr, int start, int len, void (*operatorArray)(U
 	int i = start;
 	
 	if (start == len-1) {            //无子集时返回 
-		operatorArray(arr, len);	
+		operatorArray(arr, len);
+		return;	
 	}
 	
 	for (i = start; i < len; i++) {
